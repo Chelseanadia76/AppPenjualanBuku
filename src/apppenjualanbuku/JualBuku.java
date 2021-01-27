@@ -16,6 +16,7 @@ public class JualBuku extends javax.swing.JFrame {
     DefaultTableModel tabModel;
     ResultSet RsTokoBuku=null;
     
+    
     public JualBuku() {
         initComponents();
         
@@ -41,7 +42,7 @@ public class JualBuku extends javax.swing.JFrame {
             tabModel=new DefaultTableModel(null,penjualanbuku);
             jTable1.setModel(tabModel);
             
-            Connection conn=(Connection)Koneksi.koneksiDB();
+            Connection conn=(Connection)Koneksi.koneksiDB;
             Statement stt=conn.createStatement();
             tabModel.getDataVector().removeAllElements();
             
@@ -460,7 +461,7 @@ public class JualBuku extends javax.swing.JFrame {
     }                                        
         else {
            try{
-                Connection conn=(Connection)Koneksi.koneksiDB();
+                Connection conn=(Connection)Koneksi.Koneksi();
                 Statement stt=conn.createStatement();
                 stt.executeUpdate("insert into tokobuku(id,Nama,Judul_Buku,Nama_Buku,Stok_Buku,Harga_Buku,Tanggal,Alamat)"+
                     "VALUES('"+id+"','"+Nama+"','"+Judul_Buku+"','"+Nama_Buku+"','"+Stok_Buku+"','"+Harga_Buku+"','"+Tanggal+"','"+Alamat+"')");
@@ -483,7 +484,7 @@ public class JualBuku extends javax.swing.JFrame {
         }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
             "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
         try{
-            Connection conn=(Connection)Koneksi.koneksiDB();
+            Connection conn=(Connection)Koneksi.Koneksi();
             Statement stt=conn.createStatement();
             stt.executeUpdate("DELETE FROM tokobuku WHERE id='"+id+"'");
             BersihData();

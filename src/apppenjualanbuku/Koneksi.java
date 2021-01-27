@@ -7,23 +7,31 @@ package apppenjualanbuku;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import com.mysql.jdbc.*;
 
-public class Koneksi {
-    private static Connection KoneksiDatabse;
-    public static Connection koneksiDB() throws SQLException {
+public class Koneksi extends javax.swing.JFrame {
+
+    private Connection koneksi;
+    
+    public Koneksi() {
+        initComponents();
+        KoneksiDatabase();
+    }
+
+     private void KoneksiDatabase() {
         try {
-            String DB ="jdbc:mysql://localhost/tokobuku";
-            String user="root";
-            String pass="";
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            KoneksiDatabse = (Connection) DriverManager.getConnection(DB,user,pass);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Tidak ada koneksi","Error",
-            JOptionPane.INFORMATION_MESSAGE);
-            System.err.println(e.getMessage());
-            System.exit(0);
+        Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException cnf) {
         }
-         return KoneksiDatabse;
+         try {
+            koneksi = DriverManager.getConnection("jdbc:mysql://localhost/dbmahasiswa", "root", "");
+            JOptionPane.showMessageDialog(null, "Koneksi Database Berhasil");
+        } catch (SQLException se) {
+            JOptionPane.showMessageDialog(null, "Koneksi Database Tidak Berhasil");
+            } catch (Exception e) {
+        }
+    }
+
+    private void initComponents() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
